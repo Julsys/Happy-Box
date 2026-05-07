@@ -29,11 +29,11 @@ const elements = {
   storyInput: document.querySelector("#storyInput"),
   charCount: document.querySelector("#charCount"),
   toast: document.querySelector("#toast"),
-  soundToggle: document.querySelector("#soundToggle")
+  soundToggle: document.querySelector("#soundToggle"),
+  backgroundMusic: document.querySelector("#backgroundMusic")
 };
 
 let activeCapsule = null;
-let backgroundMusic = null;
 
 function getCapsules() {
   const raw = localStorage.getItem(STORAGE_KEY);
@@ -262,9 +262,11 @@ function showToast(message) {
 }
 
 function toggleMusic() {
-  backgroundMusic = backgroundMusic || new Audio("assets/happy-box-bgm.mp3");
-  backgroundMusic.loop = true;
-  backgroundMusic.volume = 0.45;
+  const backgroundMusic = elements.backgroundMusic;
+  if (!backgroundMusic) {
+    showToast("Không tìm thấy file nhạc nền.");
+    return;
+  }
 
   if (!backgroundMusic.paused) {
     backgroundMusic.pause();
@@ -273,6 +275,7 @@ function toggleMusic() {
     return;
   }
 
+  backgroundMusic.volume = 0.45;
   backgroundMusic.play()
     .then(() => {
       elements.soundToggle.classList.add("active");
@@ -300,6 +303,10 @@ document.querySelector("#thanksBtn").addEventListener("click", () => addReaction
 elements.catchBtn.addEventListener("click", animateCatch);
 elements.form.addEventListener("submit", submitStory);
 elements.soundToggle.addEventListener("click", toggleMusic);
+elements.backgroundMusic?.addEventListener("error", () => {
+  elements.soundToggle.classList.remove("active");
+  showToast("Không tải được file nhạc. Hãy kiểm tra assets/happy-box-bgm.mp3 trên GitHub.");
+});
 elements.storyInput.addEventListener("input", () => {
   elements.charCount.textContent = `${elements.storyInput.value.length}/420`;
 });
