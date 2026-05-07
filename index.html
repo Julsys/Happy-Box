@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Happy Box</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell" aria-label="Happy Box app">
+      <section class="machine" aria-label="May gap vien nhong hanh phuc">
+        <header class="top-bar">
+          <div class="title-marquee pixel-panel">
+            <span class="spark">+</span>
+            <h1>HAPPY<br>BOX</h1>
+            <span class="spark">+</span>
+          </div>
+
+          <div class="icon-row">
+            <button class="square-btn" id="openSubmit" type="button" aria-label="Gui cau chuyen">
+              <span aria-hidden="true">✎</span>
+            </button>
+            <button class="square-btn" id="soundToggle" type="button" aria-label="Bat tat nhac nen">
+              <span aria-hidden="true">♪</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="play-window">
+          <div class="stars" aria-hidden="true"></div>
+
+          <aside class="target-card pixel-panel">
+            <span>TARGET</span>
+            <div class="mini-capsule capsule pink" aria-hidden="true"></div>
+            <b>x 1</b>
+          </aside>
+
+          <aside class="time-card pixel-panel">
+            <span class="clock" aria-hidden="true">◷</span>
+            <strong id="timeCount">30</strong>
+            <span>TIME</span>
+          </aside>
+
+          <div class="claw-rig" id="clawRig" aria-hidden="true">
+            <div class="chain"></div>
+            <div class="claw-head">✦</div>
+            <div class="claw-arm left"></div>
+            <div class="claw-arm right"></div>
+            <div class="grabbed-capsule" id="grabbedCapsule"></div>
+          </div>
+
+          <div class="capsule-pit" id="capsulePit" aria-hidden="true"></div>
+        </div>
+
+        <footer class="control-deck">
+          <div class="price-panel pixel-panel">
+            <span>Cùng chữa lành nào!</span>
+            <div class="slot" aria-hidden="true"></div>
+          </div>
+
+          <div class="joystick" aria-hidden="true">
+            <div class="stick-ball"></div>
+            <div class="stick"></div>
+            <div class="base"></div>
+          </div>
+
+          <button class="catch-btn" id="catchBtn" type="button">
+            <span>Gắp</span>
+          </button>
+        </footer>
+      </section>
+
+      <section class="side-panel" aria-label="Bang hanh phuc">
+        <div class="note-board pixel-panel">
+          <p class="eyebrow">Anonymous capsules</p>
+          <h2>Mỗi viên nhộng giữ một mẩu chuyện vui.</h2>
+          <p id="statsText">Đang có 0 mẩu chuyện trong hộp.</p>
+          <button class="secondary-btn" id="openSubmitSide" type="button">Bỏ thêm một viên</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="story-modal" id="storyModal" aria-labelledby="storyTitle">
+      <div class="modal-card">
+        <button class="close-btn" id="closeStory" type="button" aria-label="Dong">×</button>
+        <div class="open-capsule" id="modalCapsule" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <article class="paper">
+          <p class="eyebrow">Mẩu chuyện hôm nay</p>
+          <h2 id="storyTitle">Bạn vừa gắp được một viên hạnh phúc</h2>
+          <p id="storyContent"></p>
+          <div class="reaction-row">
+            <button id="heartBtn" type="button">❤️ Thả tim</button>
+            <button id="thanksBtn" type="button">Cảm ơn bạn, tôi thấy tốt hơn rồi</button>
+          </div>
+          <p class="tiny" id="reactionText"></p>
+        </article>
+      </div>
+    </dialog>
+
+    <dialog class="submit-modal" id="submitModal" aria-labelledby="submitTitle">
+      <form class="modal-card submit-card" id="storyForm" method="dialog">
+        <button class="close-btn" id="closeSubmit" type="button" aria-label="Dong">×</button>
+        <h2 id="submitTitle">Gửi một mảnh ghép hạnh phúc vào Happy Box</h2>
+        <label for="storyInput">Điều nhỏ nào đã làm bạn hạnh phúc?</label>
+        <textarea id="storyInput" maxlength="420" required placeholder="Ví dụ: Sáng nay một người lạ giữ cửa thang máy cho mình, rồi cả hai cùng cười..."></textarea>
+        <div class="form-row">
+          <span id="charCount">0/420</span>
+          <button class="secondary-btn" type="submit">Bỏ vào máy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
